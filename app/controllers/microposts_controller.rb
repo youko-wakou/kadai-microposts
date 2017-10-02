@@ -1,7 +1,14 @@
 class MicropostsController < ApplicationController
   before_action :require_user_logged_in
+  before_action :require_user_logged_in, only: [:followings,:followers]
   before_action :correct_user, only:[:destroy]
+  
+  def index
+    @user = User.find_by(id: params[:user])
+  end
   def create
+      # @id = Micropost.find(params[:id])
+
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       flash[:success] = 'メッセージを投稿しました'
@@ -19,6 +26,19 @@ class MicropostsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
   
+  def clips
+    @micropost = Micropost.find(params[:id])
+    @clips = @micropost.favorites.page(params[:page])
+    counts(@micropost)
+  end
+  
+  def clipeds
+    @micropost = Micropost.find(params[:page])
+    @clipeds = @micropost.favorites.page(params[:page])
+    counts(@micropost)
+  end
+  
+  
   private
   
   def micropost_params 
@@ -31,4 +51,5 @@ class MicropostsController < ApplicationController
       redirect_to root_url
     end
   end
+  
 end

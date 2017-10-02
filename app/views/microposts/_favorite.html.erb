@@ -1,0 +1,10 @@
+ 
+<div class="media-left">
+  <% user.each do |user| %>
+  <img class="media-object img-rounded" src="<%= gravatar_url(user,options= {size: 50}) %>"alt="">
+  
+</div>
+  <div>
+    <%= link_to user.name, user_path(user) %><span class="text-muted">
+    <% end %>
+  </div>

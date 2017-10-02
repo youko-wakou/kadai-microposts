@@ -17,6 +17,8 @@ default: &default
   password:
   socket: /var/run/mysqld/mysqld.sock
 
+
+
 development:
   <<: *default
   database: microposts_development
@@ -47,8 +49,12 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: microposts_production
+  user_name: microposts
   username: microposts
   password: <%= ENV['MICROPOSTS_DATABASE_PASSWORD'] %>

@@ -12,10 +12,12 @@ Rails.application.routes.draw do
       get :followings
       # /users/:id/followers(.:format)
       get :followers
+      
     end
    
   end
 
-  resources :microposts, only: [:create, :destroy]
+  resources :microposts, only: [:create, :destroy, :index] 
   resources :relationships, only: [:create, :destroy]
+  resources :favorites, only: [:create, :destroy]
 end

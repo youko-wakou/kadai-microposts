@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="center-block">
+    <div class="col-xs-10 col-sm-8 col-md-6 col-lg-5">
+      <% current_user.favorite_microposts.each do |favorite| %>
+      
+        <ul class="media-list well well-lg">
+          <li class="media">
+            <% @user = User.where(id: favorite.user_id) %>
+            <%= render 'microposts/favorite.html.erb', user: @user %>
+            <div class="media-body">
+             
+              <div>
+                <p><%= favorite.user_id %><%= favorite.id %></p>
+                <p><%= favorite.created_at %><%= favorite.updated_at %></p>
+                <p><%= favorite.content %></p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
